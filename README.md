@@ -1,5 +1,8 @@
 # Cloudisense on Docker
 
+![Cloudisense Demo](assets/dashboard.png)
+
+
 ## Overview
 This repository provides a **Dockerized setup** for **Cloudisense**, allowing for **easy deployment and execution**. It includes:
 - A **Dockerfile** to build the Cloudisense image.
@@ -87,6 +90,9 @@ cat /root/filesystem/logs/fakelog.log
 ---
 
 ## Accessing Cloudisense in browser
+
+![Cloudisense Login](assets/login.png)
+
 
 To **access cloudisense client** in the browser use:
 ```bash
