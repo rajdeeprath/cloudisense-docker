@@ -55,6 +55,8 @@ sudo docker-compose up --build -d
 ---
 
 ## ⚙️ Environment Variables
+
+
 | **Variable** | **Description** | **Default Value** |
 |-------------|----------------|------------------|
 | `ENV_BIND_HOST` | The host IP address the application binds to | `0.0.0.0` |
@@ -67,6 +69,8 @@ sudo docker-compose up --build -d
 ---
 
 ## Debugging & Logs
+
+
 To **view logs** from the running container:
 ```bash
 sudo docker-compose logs -f
@@ -79,6 +83,26 @@ To check if **log generation is working**:
 ```bash
 cat /root/filesystem/logs/fakelog.log
 ```
+
+---
+
+## Accessing Cloudisense in browser
+
+To **access cloudisense client** in the browser use:
+```bash
+http://localhost:8000
+```
+
+**Authentication form information**
+
+* **host : localhost**
+
+* **port : 8000**
+
+* **default username : administrator**
+
+* **default password : changeme**
+
 
 ---
 
