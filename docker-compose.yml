@@ -1,0 +1,19 @@
+version: "0.1"
+
+services:
+  cloudisense:
+    image: rajdeeprath/cloudisense:0.0.1
+    container_name: cloudisense
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      ENV_BIND_HOST: "0.0.0.0"
+      ENV_LOG_TARGETS: '[{"enabled": true, "name": "fakelog.log", "log_file_path": "/root/filesystem/logs/fakelog.log"}]'
+      ENV_ACCESSIBLE_PATHS: "[\"/root/filesystem\"]"
+      ENV_DOWNLOADABLE_PATHS: "[\"/root/filesystem\"]"
+    volumes:
+      - logs:/root/filesystem/logs
+
+volumes:
+  logs:
