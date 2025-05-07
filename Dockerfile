@@ -1,5 +1,5 @@
 # Use a minimal base image
-FROM python:3.8-slim
+FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
@@ -41,13 +41,14 @@ RUN echo '#!/bin/bash' > /root/fake_log_generator.sh && \
     chmod +x /root/fake_log_generator.sh
 
 # Set additional environment variables
-ENV ENV_BIND_HOST=0.0.0.0
-ENV ENV_LOG_TARGETS='[{"enabled": true, "name": "fakelog.log", "log_file_path": "/root/filesystem/logs/fakelog.log"}]'
-ENV ENV_ACCESSIBLE_PATHS="[\"/root/filesystem\"]"
-ENV ENV_DOWNLOADABLE_PATHS="[\"/root/filesystem\"]"
+# Deprecated -> use docker compose
+#ENV ENV_BIND_HOST=0.0.0.0
+#ENV ENV_LOG_TARGETS='[{"enabled": true, "name": "fakelog.log", "log_file_path": "/root/filesystem/logs/fakelog.log"}]'
+#ENV ENV_ACCESSIBLE_PATHS="[\"/root/filesystem\"]"
+#ENV ENV_DOWNLOADABLE_PATHS="[\"/root/filesystem\"]"
 
 # Expose port 8000
 EXPOSE 8000
 
 # Run the log generator in the background & Start Cloudisense
-CMD ["/bin/bash", "-c", "/root/fake_log_generator.sh & exec /root/virtualenvs/cloudisense/bin/python3.8 /root/cloudisense/run.py"]
+CMD ["/bin/bash", "-c", "/root/fake_log_generator.sh & exec /root/virtualenvs/cloudisense/bin/python /root/cloudisense/run.py"]
