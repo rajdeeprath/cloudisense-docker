@@ -74,6 +74,9 @@ sudo docker-compose up --build -d
 ---
 
 
+
+---
+
 ## Accessing Cloudisense in Browser
 
 ![Cloudisense Login](assets/login.png)
@@ -93,6 +96,17 @@ http://localhost:8000
 - **Default Username:** `administrator`
 - **Default Password:** `changeme`
 
+
+## 🧠 SmartAssist: AI-powered Assistant
+
+SmartAssist is an integrated AI assistant in Cloudisense, powered by OpenAI.
+
+- It can understand questions about system logs, modules, stats, and workflows.
+- It uses the OpenAI API to provide intelligent summaries and suggestions.
+- The assistant can be invoked from within the Cloudisense dashboard.
+- Requires setting `ENV_OPENAI_API_KEY` in the environment to enable.
+
+![SmartAssist](assets/smartassist.png)
 
 ---
 
