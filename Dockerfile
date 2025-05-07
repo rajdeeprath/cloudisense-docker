@@ -40,13 +40,6 @@ RUN echo '#!/bin/bash' > /root/fake_log_generator.sh && \
     echo 'done' >> /root/fake_log_generator.sh && \
     chmod +x /root/fake_log_generator.sh
 
-# Set additional environment variables
-# Deprecated -> use docker compose
-#ENV ENV_BIND_HOST=0.0.0.0
-#ENV ENV_LOG_TARGETS='[{"enabled": true, "name": "fakelog.log", "log_file_path": "/root/filesystem/logs/fakelog.log"}]'
-#ENV ENV_ACCESSIBLE_PATHS="[\"/root/filesystem\"]"
-#ENV ENV_DOWNLOADABLE_PATHS="[\"/root/filesystem\"]"
-
 # Expose port 8000
 EXPOSE 8000
 
