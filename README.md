@@ -35,10 +35,15 @@ The `Dockerfile` is used to **build the Cloudisense Demo Docker image**, install
 
 ### 🔹 Building the Docker Image  
 
-To build the Docker image, run:  
+To build the Docker image for cloudisense demo, run:  
 
 ```bash
-sudo docker build -t rajdeeprath/cloudisense:0.0.1 .
+sudo docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  -t rajdeeprath/cloudisense:0.0.2 \
+  -t rajdeeprath/cloudisense:latest \
+  -f Dockerfile \
+  --push .
 ```  
 
 
@@ -93,14 +98,16 @@ sudo docker-compose up --build -d
 ## ⚙️ Environment Variables  
 
 
-| **Variable** | **Description** | **Default Value** |  
-|-------------|----------------|------------------|  
-| `ENV_BIND_HOST` | The host IP address the application binds to | `0.0.0.0` |  
-| `ENV_LOG_TARGETS` | List of log files monitored by Cloudisense | `[{"enabled": true, "name": "fakelog.log", "log_file_path": "/root/filesystem/logs/fakelog.log"}]` |  
-| `ENV_ACCESSIBLE_PATHS` | List of directories accessible via the file manager | `["/root/filesystem"]` |  
-| `ENV_DOWNLOADABLE_PATHS` | List of directories from which files can be downloaded | `["/root/filesystem"]` |  
-| `ENV_ALLOWED_READ_EXTENSIONS` | Allowed file extensions for reading | `[".properties", ".xml", ".txt", ".ini", ".log", ".sh", ".bat"]` |  
-| `ENV_ALLOWED_WRITE_EXTENSIONS` | Allowed file extensions for writing | `[".properties", ".xml", ".txt", ".ini", ".log"]` |  
+| **Variable**                    | **Description**                                                                 | **Default Value**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `ENV_BIND_HOST`                | The host IP address the application binds to                                   | `0.0.0.0`                                                                                                   |
+| `ENV_LOG_TARGETS`              | List of log files monitored by Cloudisense                                     | `[{"enabled": true, "name": "fakelog.log", "log_file_path": "/root/filesystem/logs/fakelog.log"}]`         |
+| `ENV_ACCESSIBLE_PATHS`         | List of directories accessible via the file manager                            | `["/root/filesystem"]`                                                                                      |
+| `ENV_DOWNLOADABLE_PATHS`       | List of directories from which files can be downloaded                         | `["/root/filesystem"]`                                                                                      |
+| `ENV_OPENAI_API_KEY`           | String value representing the OpenAI API token for LLM features                | *(empty string by default)*                                                                                |
+| `ENV_ALLOWED_READ_EXTENSIONS`  | Allowed file extensions for reading                                            | `[".properties", ".xml", ".txt", ".ini", ".log", ".sh", ".bat"]`                                            |
+| `ENV_ALLOWED_WRITE_EXTENSIONS` | Allowed file extensions for writing                                            | `[".properties", ".xml", ".txt", ".ini", ".log"]`                                                           |
+
 
 
 ---  
@@ -113,13 +120,9 @@ To **view logs** from the running container:
 
 ```bash
 sudo docker-compose logs -f
+sudo docker-compose logs -f cloudisense
 ```  
 
-To **manually enter the container**:  
-
-```bash
-sudo docker exec -it cloudisense bash
-```  
 
 To check if **log generation is working**:  
 
@@ -143,7 +146,7 @@ http://localhost:8000
 ```  
 
 
-### **Login Form Info**  
+### **Login Form Demo Info**  
 
 - **Host:** `localhost`  
 - **Port:** `8000`  
