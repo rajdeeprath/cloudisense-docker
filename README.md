@@ -74,6 +74,29 @@ sudo docker-compose up --build -d
 ---
 
 
+## Accessing Cloudisense in Browser
+
+![Cloudisense Login](assets/login.png)
+
+
+To **access Cloudisense client** in the browser, use:
+
+```bash
+http://localhost:8000
+```
+
+
+### **Login Form Demo Info**
+
+- **Host:** `localhost`
+- **Port:** `8000`
+- **Default Username:** `administrator`
+- **Default Password:** `changeme`
+
+
+---
+
+
 ## Dockerfile
 
 The `Dockerfile` is used to **build the Cloudisense Demo Docker image**, installing necessary dependencies, setting up logging, environment variables, and running the application.
@@ -81,7 +104,7 @@ The `Dockerfile` is used to **build the Cloudisense Demo Docker image**, install
 
 ### Steps in the Dockerfile
 
-1. Uses **Python 3.8-slim** as the base image.
+1. Uses **python:3.9-slim** as the base image.
 2. Installs necessary tools (`git`).
 3. **Clones the Cloudisense Installer Script** and executes it to install Cloudisense.
 4. **Installs `cloudisensedemo` profile** to prepare the installation with demo-able content.
@@ -92,7 +115,7 @@ The `Dockerfile` is used to **build the Cloudisense Demo Docker image**, install
 9. **Starts the log generator and the Cloudisense application**.
 
 
-### 🔹 Building the Docker Image  (Optional)
+### 🔹 Building the Docker Image
 
 To build the Docker image for cloudisense demo, run:
 
@@ -132,29 +155,6 @@ To check if **log generation is working**:
 ```bash
 cat /root/filesystem/logs/fakelog.log
 ```
-
-
----
-
-
-## Accessing Cloudisense in Browser
-
-![Cloudisense Login](assets/login.png)
-
-
-To **access Cloudisense client** in the browser, use:
-
-```bash
-http://localhost:8000
-```
-
-
-### **Login Form Demo Info**
-
-- **Host:** `localhost`
-- **Port:** `8000`
-- **Default Username:** `administrator`
-- **Default Password:** `changeme`
 
 
 ---
