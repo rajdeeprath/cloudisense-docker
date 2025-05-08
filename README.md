@@ -4,7 +4,7 @@
 
 ---
 
-## 🧭 Overview
+## Overview
 
 This repository provides a **Dockerized setup** for **Cloudisense**, allowing for easy deployment and execution. It includes:
 
@@ -14,7 +14,7 @@ This repository provides a **Dockerized setup** for **Cloudisense**, allowing fo
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 1. **Clone the repository:**
    ```bash
@@ -30,7 +30,7 @@ This repository provides a **Dockerized setup** for **Cloudisense**, allowing fo
 
 ---
 
-## 🔹 Running the Container
+## Running the Container
 
 To start the container using Docker Compose, run:
 
@@ -52,7 +52,7 @@ sudo docker-compose up --build -d
 
 ---
 
-## ⚙️ Environment Configuration
+## Environment Configuration
 
 The `.env` file contains the environment variables required to run the demo.
 
@@ -76,7 +76,7 @@ Other variables in the file are pre-filled with demo values for testing purposes
 
 ---
 
-## 🌐 Accessing Cloudisense in Browser
+## Accessing Cloudisense in Browser
 
 ![Cloudisense Login](assets/login.png)
 
@@ -95,7 +95,7 @@ http://localhost:8000
 
 ---
 
-## 🧠 SmartAssist: AI-powered Assistant
+## SmartAssist: AI-powered Assistant
 
 SmartAssist is an integrated AI assistant in Cloudisense.
 
@@ -108,7 +108,7 @@ SmartAssist is an integrated AI assistant in Cloudisense.
 
 ---
 
-## 🐳 Docker Compose File
+## Docker Compose File
 
 The `docker-compose.yml` file runs Cloudisense in a container with demo configurations and exposes port `8000`.
 
@@ -120,7 +120,7 @@ The `docker-compose.yml` file runs Cloudisense in a container with demo configur
 
 ---
 
-## 🧱 Dockerfile
+## Dockerfile
 
 The `Dockerfile` builds the Cloudisense Demo Docker image, including:
 
@@ -136,6 +136,23 @@ The `Dockerfile` builds the Cloudisense Demo Docker image, including:
 
 ### 🔨 Building the Docker Image
 
+#### Initialize Docker Buildx Builder
+
+```bash
+
+sudo docker buildx create --name multiarch-builder --use
+sudo docker buildx inspect --bootstrap
+
+```
+
+#### Setup QEMU for Cross-Architecture Support (One-Time)
+
+```bash
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+```
+
+#### Building image
+
 ```bash
 sudo docker buildx build \
   --platform linux/amd64,linux/arm64 \
@@ -147,14 +164,14 @@ sudo docker buildx build \
 
 ---
 
-## 🐋 DockerHub
+## DockerHub
 
 You can find the images here:  
 [CloudiSENSE on Docker Hub](https://hub.docker.com/repository/docker/rajdeeprath/cloudisense/general)
 
 ---
 
-## 🪵 Debugging & Logs
+## Debugging & Logs
 
 To view logs from the container:
 
@@ -171,7 +188,7 @@ cat /root/filesystem/logs/fakelog.log
 
 ---
 
-## ✅ Summary
+## Summary
 
 - **Dockerfile** builds a complete image of Cloudisense with dependencies.
 - **Docker Compose** runs the app using demo configuration.
