@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Install only git, clone the repository, run the installer, and clean up
 RUN apt-get update && apt-get install -y --no-install-recommends git && \
-    git clone https://github.com/rajdeeprath/cloudisense-installer /cloudisense-installer && \
+    git clone --branch feature/version_builds  https://github.com/rajdeeprath/cloudisense-installer /cloudisense-installer && \
     chmod +x /cloudisense-installer/*.sh && \
     PROGRAM_INSTALL_AS_SERVICE=false CLOUDISENSE_VERSION=$CLOUDISENSE_VERSION /cloudisense-installer/install.sh -i -c && \
     CLOUDISENSE_VERSION=$CLOUDISENSE_VERSION /cloudisense-installer/install.sh -i -p "cloudisensedemo" && \
