@@ -1,6 +1,10 @@
 # Use a minimal base image
 FROM python:3.9-slim
 
+# build argument without a default -> installer will find out default on s3
+ARG CLOUDISENSE_VERSION
+ENV CLOUDISENSE_VERSION=${CLOUDISENSE_VERSION}
+
 # Set working directory
 WORKDIR /app
 
@@ -8,8 +12,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends git && \
     git clone https://github.com/rajdeeprath/cloudisense-installer /cloudisense-installer && \
     chmod +x /cloudisense-installer/*.sh && \
-    PROGRAM_INSTALL_AS_SERVICE=false /cloudisense-installer/install.sh -i -c && \
-    /cloudisense-installer/install.sh -i -p "cloudisensedemo" && \
+    PROGRAM_INSTALL_AS_SERVICE=false CLOUDISENSE_VERSION=$CLOUDISENSE_VERSION /cloudisense-installer/install.sh -i -c && \
+    CLOUDISENSE_VERSION=$CLOUDISENSE_VERSION /cloudisense-installer/install.sh -i -p "cloudisensedemo" && \
     rm -rf /cloudisense-installer && \
     apt-get remove -y git && apt-get autoremove -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/* ~/.cache/pip
