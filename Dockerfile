@@ -2,21 +2,24 @@
 FROM python:3.9-slim
 
 # build argument without a default -> installer will find out default on s3
-ARG CLOUDISENSE_VERSION
+ARG CLOUDISENSE_VERSION=
 ENV CLOUDISENSE_VERSION=${CLOUDISENSE_VERSION}
+ENV PROGRAM_INSTALL_AS_SERVICE=false
+
 
 # Set working directory
 WORKDIR /app
 
 # Install only git, clone the repository, run the installer, and clean up
-RUN apt-get update && apt-get install -y --no-install-recommends git && \
-    git clone --branch feature/version_builds  https://github.com/rajdeeprath/cloudisense-installer /cloudisense-installer && \
+RUN apt-get update && apt-get install -y --no-install-recommends git curl && \
+    git clone --branch feature/version_builds https://github.com/rajdeeprath/cloudisense-installer /cloudisense-installer && \
     chmod +x /cloudisense-installer/*.sh && \
-    PROGRAM_INSTALL_AS_SERVICE=false CLOUDISENSE_VERSION=$CLOUDISENSE_VERSION /cloudisense-installer/install.sh -i -c && \
-    CLOUDISENSE_VERSION=$CLOUDISENSE_VERSION /cloudisense-installer/install.sh -i -p "cloudisensedemo" && \
+    /cloudisense-installer/install.sh -i -c && \
+    /cloudisense-installer/install.sh -i -p "cloudisensedemo" && \
     rm -rf /cloudisense-installer && \
-    apt-get remove -y git && apt-get autoremove -y && \
+    apt-get remove -y git curl && apt-get autoremove -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/* ~/.cache/pip
+
 
 # Download and extract Apache Tomcat, then clean up
 RUN apt-get update && apt-get install -y --no-install-recommends wget unzip && \
