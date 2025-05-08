@@ -136,6 +136,23 @@ The `Dockerfile` builds the Cloudisense Demo Docker image, including:
 
 ### 🔨 Building the Docker Image
 
+#### Initialize Docker Buildx Builder
+
+```bash
+
+sudo docker buildx create --name multiarch-builder --use
+sudo docker buildx inspect --bootstrap
+
+```
+
+#### Setup QEMU for Cross-Architecture Support (One-Time)
+
+```bash
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+```
+
+#### Building image
+
 ```bash
 sudo docker buildx build \
   --platform linux/amd64,linux/arm64 \
